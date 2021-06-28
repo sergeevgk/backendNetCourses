@@ -1,0 +1,63 @@
+﻿@page
+
+@model Pages.UserPages.IndexModel
+
+@{
+	ViewBag.Title = "User home page";
+}
+
+<div class="container text-center justify-content-center">
+	<h2>@ViewBag.Title.</h2>
+
+	<div class="row">
+		<div class="col-md-12 text-left">
+			<form method="post" role="form" class="form-horizontal">
+				<div class="form-group">
+					<button asp-page-handler="LogOut" class="btn btn-primary">Log Out</button>
+				</div>
+			</form>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-md-12">
+			<div>
+				<h3>List of channels</h3>
+			</div>
+		</div>
+	</div>
+
+	<form method="post" role="form" class="form-horizontal">
+		<table id="message-table" class="table table-striped table-bordered table-hover">
+			<thead>
+				<tr>
+					<td>Connect</td>
+					<td>Channel Name</td>
+					<td>Channel Data Type</td>
+				</tr>
+			</thead>
+			@foreach (var channel in Model.Channels)
+			{
+				<tr>
+					<td>
+						<input type="checkbox" name="Subscriptions" value="@channel.Name">
+					</td>
+					<td>
+						@channel.Name
+					</td>
+					<td>
+						@channel.Type
+					</td>
+
+				</tr>
+			}
+		</table>
+		<div class="row">
+			<div class="form-group">
+				<div class="col-md-12">
+					<button asp-page-handler="Connect" class="btn btn-primary">Connect</button>
+				</div>
+			</div>
+		</div>
+	</form>
+</div>

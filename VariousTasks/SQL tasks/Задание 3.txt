@@ -1,0 +1,17 @@
+•	Как выбрать все записи со всеми столбцами из таблицы?
+SELECT *
+FROM TableName
+•	Как посчитать количество записей в таблице, удовлетворяющих некоторому условию?
+SELECT COUNT (ColumnName)
+FROM TableName
+WHERE (Condition)
+•	Как выбрать данные сразу из нескольких столбцов, если записи объединены одним ключом? (LEFT JOIN, RIGHT JOIN, INNER JOIN)
+SELECT (ColumnName1 [, ColumnName2, …] из обеих таблиц)
+FROM FirstTableName
+INNER/RIGHT/LEFT/FULL JOIN SecondTableName ON FirstTable.ColumnName1=SecondTable.ColumnName2;
+Если названия столбцов совпадают, нужно указать название таблицы перед ним (TableName.ColumnName).
+•	Как выбрать все значения таблицы, имеющие дубликаты по одному столбцу (HAVING)
+SELECT * 
+FROM TableName
+GROUP BY ColumnName1
+HAVING COUNT(ColumnName1) > 1; 

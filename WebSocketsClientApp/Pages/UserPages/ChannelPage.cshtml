@@ -1,0 +1,60 @@
+﻿@page
+@model WebSocketsClientApp.Pages.UserPages.ChannelPageModel
+@{
+	ViewBag.Title = "Channel page";
+}
+<div class="container text-center justify-content-center">
+	<h2>@ViewBag.Title</h2>
+	@foreach (var channel in Model.Subscriptions)
+	{
+		<div class="row">
+			<div class="col-md-12">
+				<h5>Channel: @channel</h5>
+			</div>
+		</div>
+	}
+	<hr />
+	<div class="row">
+		<div class="col-md-12">
+			<form method="post" role="form" class="form-horizontal">
+				<div class="form-group">
+					<div class="col-md-12 justify-content-between">
+						<button asp-page-handler="StartHubs" class="btn btn-primary">Start Hubs</button>
+						<button asp-page-handler="StopHubs" class="btn btn-primary">Stop Hubs</button>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+	<hr />
+
+	@*<h2>Ajax</h2>*@
+	@*<p><button class="btn btn-primary" id="load">Load</button></p>*@
+	@*<div id="grid">
+			<table id="message-table" class="table table-striped">
+			</table>
+		</div>*@
+</div>
+@section Scripts{
+	<script>
+		document.getElementById('load').addEventListener('click', () => {
+			fetch('/userpages/channelpage?handler=ChannelPagePartial')
+				.then((response) => {
+					return response.text();
+				})
+				.then((result) => {
+					document.getElementById('message-table').innerHTML += result;
+				});
+		});
+		document.addEventListener('onMessage', (message) => {
+			fetch('/userpages/channelpage?handler=ChannelPagePartial')
+				.then((response) => {
+					return response.text();
+				})
+				.then((result) => {
+					alert(result);
+					document.getElementById('message-table').innerHTML += "<tr><td>" + message + "</td></tr>";
+				});
+		});
+	</script>
+}

@@ -1,0 +1,7 @@
+Напишите запрос к БД, созданной в рамках задачи CRUD на ASP.NET Core Web API, запрос, содержащий SELECT, WHERE и LEFT JOIN. Постройте для этого запроса план запроса в SSMS.
+SELECT  Unit.Name,
+	Count(Tank.Id) as TankCount
+  FROM Unit
+  LEFT JOIN Tank ON Unit.Id=Tank.UnitId
+  WHERE Tank.Volume >= 0
+  GROUP BY Unit.Name
